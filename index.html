@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tasks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <header class="page-header">
+      <h1 class="page-title">Tasks</h1>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-toggle__symbol">◐</span>
+      </button>
+    </header>
+
+    <section class="search-section">
+      <input
+        type="text"
+        class="search-input"
+        id="searchInput"
+        placeholder="Search by title or description"
+        autocomplete="off"
+      >
+    </section>
+
+    <section class="filter-section">
+      <div class="filter-row">
+        <span class="filter-label">Category</span>
+        <div class="category-list" id="categoryFilters"></div>
+        <button class="add-category-btn" id="addCategoryBtn">+ New</button>
+      </div>
+      <div class="filter-row">
+        <span class="filter-label">Sort</span>
+        <div class="sort-list">
+          <button class="sort-btn is-active" data-sort="created">Newest</button>
+          <button class="sort-btn" data-sort="priority">Priority</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="form-section">
+      <button class="form-toggle" id="formToggle">+ Add task</button>
+      <form class="task-form is-hidden" id="taskForm" novalidate>
+        <div class="field">
+          <label class="field-label" for="titleInput">Title</label>
+          <input type="text" class="field-input" id="titleInput" maxlength="100">
+          <span class="field-error" id="titleError"></span>
+        </div>
+        <div class="field">
+          <label class="field-label" for="descInput">Description</label>
+          <textarea class="field-input field-textarea" id="descInput" rows="3" maxlength="500"></textarea>
+          <span class="field-error" id="descError"></span>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label class="field-label" for="prioritySelect">Priority</label>
+            <select class="field-input" id="prioritySelect">
+              <option value="low">Low</option>
+              <option value="medium" selected>Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="field-label" for="categorySelect">Category</label>
+            <select class="field-input" id="categorySelect"></select>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-ghost" id="cancelBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="submitBtn">Save</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="task-list-section">
+      <div class="task-list" id="taskList"></div>
+      <div class="empty-state is-hidden" id="emptyState">
+        <p class="empty-text">No tasks yet.</p>
+      </div>
+    </section>
+  </main>
+
+  <div class="notification-stack" id="notificationStack"></div>
+
+  <div class="modal-overlay is-hidden" id="categoryModal">
+    <div class="modal">
+      <h2 class="modal-title">New category</h2>
+      <input type="text" class="field-input" id="newCategoryInput" maxlength="30" placeholder="Category name">
+      <span class="field-error" id="categoryError"></span>
+      <div class="form-actions">
+        <button class="btn btn-ghost" id="cancelCategoryBtn">Cancel</button>
+        <button class="btn btn-primary" id="saveCategoryBtn">Add</button>
+      </div>
+      <div class="custom-categories" id="customCategoriesList"></div>
+    </div>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
